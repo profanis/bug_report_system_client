@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" (click)="sortBy('title')">Title</th>
+      <th scope="col" (click)="sortBy('priority')">Priority</th>
+      <th scope="col" (click)="sortBy('reporter')">Reporter</th>
+      <th scope="col" (click)="sortBy('createdAt')">Date Created</th>
+      <th scope="col" (click)="sortBy('status')">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bug of (bugs$ | async) ">
+      <th>{{bug.title}}</th>
+      <td>{{bug.priority}}</td>
+      <td>{{bug.reporter}}</td>
+      <td>{{bug.createdAt}}</td>
+      <td>{{bug.status}}</td>
+    </tr>
+  </tbody>
+</table>
