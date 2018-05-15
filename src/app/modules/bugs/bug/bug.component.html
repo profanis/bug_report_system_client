@@ -1,0 +1,40 @@
+<section>
+  <h2>Bug submission form</h2>
+  <form #bugForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <input type="text" name="title" required [(ngModel)]="bug.title"/>
+    </div>
+    <div>
+      <label for="description">description</label>
+      <textarea [(ngModel)]="bug.description" required name="description"></textarea>
+    </div>
+    <div>
+      <label for="priority">Priority</label>
+      <select [(ngModel)]="bug.priority" required name="priority">
+        <option value="0">Minor</option>
+        <option value="1">Major</option>
+        <option value="2">Critical</option>
+      </select>
+    </div>
+    <div>
+      <label for="reporter">Reporter</label>    
+      <select [(ngModel)]="bug.reporter" name="reporter">
+        <option>QA</option>
+        <option>PO</option>
+        <option>Dev</option>
+      </select>
+    </div>
+    <div>
+      <label for="status">Status</label>
+      <select [(ngModel)]="bug.status" [required]="bug.reporter === 'QA'" name="status">
+        <option>Ready for test</option>
+        <option>Done</option>
+        <option>Rejected</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!bugForm.valid && !statusIsInvalid">Save</button>
+    <p *ngIf="!bugForm.valid && !bugForm.pristine && !statusIsInvalid">Check field validity</p>
+  </form>
+</section>

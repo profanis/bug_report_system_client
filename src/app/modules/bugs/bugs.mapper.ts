@@ -1,8 +1,8 @@
-import { Bugs } from "./models/bugs.model";
+import { Bug } from "./models/bugs.model";
 
 export class BugsMapper {
 
-  static toView(bugFromServer: any): Bugs {
+  static toView(bugFromServer: any): Bug {
     return {
       id: bugFromServer.id,
       title: bugFromServer.title,
@@ -13,5 +13,9 @@ export class BugsMapper {
       createdAt: bugFromServer.createdAt,
       updatedAt: bugFromServer.updatedAt
     };
+  }
+
+  static toServer(bug: any): Bug {
+    return {...bug, priority: +bug.priority };
   }
 }
