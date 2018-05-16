@@ -5,6 +5,8 @@ import { SharedModule } from "../../shared/shared.module";
 import { BugsListComponent } from "./bugs-list/bugs-list.component";
 import { BugsService } from "./bugs.service";
 import { BugsResolvers } from "./resolvers/bugs.resolver";
+import { AuthenticatedUsersGuard } from "../../shared/authenticated-users.guard";
+import { UnfinishedChangesGuard } from "../../shared/unfinished-changes.guard";
 
 const routes: Routes = [
   {
@@ -12,7 +14,9 @@ const routes: Routes = [
     component: BugsListComponent,
     resolve: {
       bugs: BugsResolvers
-    }
+    },
+    canActivate: [AuthenticatedUsersGuard],
+    canDeactivate: [UnfinishedChangesGuard]
   }
 ];
 

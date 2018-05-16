@@ -6,6 +6,7 @@ import { Observable } from "rxjs/Observable";
 
 import { Bugs } from "../models/bugs.model";
 import { BugsService } from "./../bugs.service";
+import { BaseComponent } from "../../../shared/base.component";
 
 
 @Component({
@@ -13,7 +14,7 @@ import { BugsService } from "./../bugs.service";
   templateUrl: "./bugs-list.component.html",
   styleUrls: ["./bugs-list.component.css"]
 })
-export class BugsListComponent implements OnInit {
+export class BugsListComponent implements BaseComponent, OnInit {
 
   bugs$: Observable<Bugs[]>;
   sortByColumn = "";
@@ -21,6 +22,8 @@ export class BugsListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private bugsService: BugsService) { }
+
+  canDeactivate = () => true;
 
   ngOnInit() {
     this.route.data.subscribe((data: { bugs: Bugs[]}) => {
