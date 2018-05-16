@@ -38,7 +38,7 @@ export class BugComponent implements OnInit {
 
   onSubmit() {
     this.service.save(this.bugFormGroup.value)
-      .subscribe(result => this.router.navigate(["bug-list"]));
+      .subscribe(result => this.router.navigate(["bugs-list"]));
   }
 
 }

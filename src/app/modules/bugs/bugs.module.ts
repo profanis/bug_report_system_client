@@ -14,10 +14,10 @@ const routes: Routes = [
     path: "bugs-list",
     component: BugsListComponent,
     canActivate: [AuthenticatedUsersGuard],
-    canDeactivate: [UnfinishedChangesGuard]
-    // resolve: {
-    //   bugs: BugsResolvers
-    // }
+    canDeactivate: [UnfinishedChangesGuard],
+    resolve: {
+      bugs: BugsResolvers
+    }
   },
   {
     path: "bug",
