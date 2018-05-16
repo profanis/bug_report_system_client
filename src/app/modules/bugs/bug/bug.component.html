@@ -1,40 +1,39 @@
 <section>
   <h2>Bug submission form</h2>
-  <form #bugForm="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="bugFormGroup" (ngSubmit)="onSubmit()">
     <div>
-      <label for="title">Title</label>
-      <input type="text" name="title" required [(ngModel)]="bug.title"/>
+      <label>Title</label>
+      <input type="text" formControlName="title"  />
     </div>
     <div>
-      <label for="description">description</label>
-      <textarea [(ngModel)]="bug.description" required name="description"></textarea>
+      <label>description</label>
+      <textarea formControlName="description" ></textarea>
     </div>
     <div>
-      <label for="priority">Priority</label>
-      <select [(ngModel)]="bug.priority" required name="priority">
+      <label>Priority</label>
+      <select  formControlName="priority">
         <option value="0">Minor</option>
         <option value="1">Major</option>
         <option value="2">Critical</option>
       </select>
     </div>
     <div>
-      <label for="reporter">Reporter</label>    
-      <select [(ngModel)]="bug.reporter" name="reporter">
+      <label>Reporter</label>    
+      <select formControlName="reporter">
         <option>QA</option>
         <option>PO</option>
         <option>Dev</option>
       </select>
     </div>
     <div>
-      <label for="status">Status</label>
-      <select [(ngModel)]="bug.status" [required]="bug.reporter === 'QA'" name="status">
+      <label>Status</label>
+      <select formControlName="status">
         <option>Ready for test</option>
         <option>Done</option>
         <option>Rejected</option>
       </select>
     </div>
 
-    <button type="submit" [disabled]="!bugForm.valid && !statusIsInvalid">Save</button>
-    <p *ngIf="!bugForm.valid && !bugForm.pristine && !statusIsInvalid">Check field validity</p>
+    <button [disabled]="bugFormGroup.invalid" type="submit">Save</button>
   </form>
 </section>
