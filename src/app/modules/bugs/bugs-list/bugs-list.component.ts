@@ -4,7 +4,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 
-import { Bugs } from "../models/bugs.model";
+import { Bug } from "../models/bugs.model";
 import { BugsService } from "./../bugs.service";
 import { BaseComponent } from "../../../shared/base.component";
 
@@ -16,7 +16,7 @@ import { BaseComponent } from "../../../shared/base.component";
 })
 export class BugsListComponent implements BaseComponent, OnInit {
 
-  bugs$: Observable<Bugs[]>;
+  bugs$: Observable<Bug[]>;
   sortByColumn = "";
   sortDirection = "";
 
@@ -26,7 +26,7 @@ export class BugsListComponent implements BaseComponent, OnInit {
   canDeactivate = () => true;
 
   ngOnInit() {
-    this.route.data.subscribe((data: { bugs: Bugs[]}) => {
+    this.route.data.subscribe((data: { bugs: Bug[]}) => {
       this.bugs$ = Observable.of(data.bugs);
     });
 

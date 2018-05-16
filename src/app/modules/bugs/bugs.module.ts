@@ -7,16 +7,21 @@ import { BugsService } from "./bugs.service";
 import { BugsResolvers } from "./resolvers/bugs.resolver";
 import { AuthenticatedUsersGuard } from "../../shared/authenticated-users.guard";
 import { UnfinishedChangesGuard } from "../../shared/unfinished-changes.guard";
+import { BugComponent } from "./bug/bug.component";
 
 const routes: Routes = [
   {
     path: "bugs-list",
     component: BugsListComponent,
-    resolve: {
-      bugs: BugsResolvers
-    },
     canActivate: [AuthenticatedUsersGuard],
     canDeactivate: [UnfinishedChangesGuard]
+    // resolve: {
+    //   bugs: BugsResolvers
+    // }
+  },
+  {
+    path: "bug",
+    component: BugComponent
   }
 ];
 
@@ -25,7 +30,7 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [BugsListComponent],
+  declarations: [BugsListComponent, BugComponent],
   exports: [RouterModule],
   providers: [BugsService, BugsResolvers]
 })
