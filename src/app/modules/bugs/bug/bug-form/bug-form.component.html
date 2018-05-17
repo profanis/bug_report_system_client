@@ -1,0 +1,34 @@
+<div [formGroup]="bugFormGroup">
+    <div class="form-group">
+        <label>Title</label>
+        <input class="form-control" type="text" formControlName="title"  />
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" formControlName="description" ></textarea>
+      </div>
+      <div class="form-group">
+        <label>Priority</label>
+        <select class="form-control" formControlName="priority">
+          <option value="0">Minor</option>
+          <option value="1">Major</option>
+          <option value="2">Critical</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Reporter</label>
+        <select class="form-control" formControlName="reporter">
+          <option>QA</option>
+          <option>PO</option>
+          <option>Dev</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select class="form-control" formControlName="status">
+          <option>Ready for test</option>
+          <option>Done</option>
+          <option>Rejected</option>
+        </select>
+      </div>
+</div>

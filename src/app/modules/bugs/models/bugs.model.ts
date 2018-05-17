@@ -1,3 +1,5 @@
+import { UserComments } from "./user-comments.model";
+
 export interface Bug {
   id: string;
   title: string;
@@ -7,4 +9,5 @@ export interface Bug {
   status?: string;
   createdAt?: string;
   updatedAt?: string;
+  userComments?: UserComments[];
 }

@@ -1,4 +1,4 @@
-<button [routerLink]="['/bug']">Add new</button>
+<button class="btn btn-primary" [routerLink]="['/bug']">Add new</button>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -7,6 +7,7 @@
       <th scope="col" (click)="sortBy('reporter')">Reporter</th>
       <th scope="col" (click)="sortBy('createdAt')">Date Created</th>
       <th scope="col" (click)="sortBy('status')">Status</th>
+      <th scope="col"># comments</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
       <td>{{bug.reporter}}</td>
       <td>{{bug.createdAt}}</td>
       <td>{{bug.status}}</td>
+      <td>{{bug.userComments?.length}}</td>
       <td><a [routerLink]="['/bug',bug.id]">Edit</a></td>
     </tr>
   </tbody>

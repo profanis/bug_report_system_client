@@ -1,39 +1,11 @@
 <section>
   <h2>Bug submission form</h2>
-  <form [formGroup]="bugFormGroup" (ngSubmit)="onSubmit()">
-    <div>
-      <label>Title</label>
-      <input type="text" formControlName="title"  />
-    </div>
-    <div>
-      <label>description</label>
-      <textarea formControlName="description" ></textarea>
-    </div>
-    <div>
-      <label>Priority</label>
-      <select  formControlName="priority">
-        <option value="0">Minor</option>
-        <option value="1">Major</option>
-        <option value="2">Critical</option>
-      </select>
-    </div>
-    <div>
-      <label>Reporter</label>    
-      <select formControlName="reporter">
-        <option>QA</option>
-        <option>PO</option>
-        <option>Dev</option>
-      </select>
-    </div>
-    <div>
-      <label>Status</label>
-      <select formControlName="status">
-        <option>Ready for test</option>
-        <option>Done</option>
-        <option>Rejected</option>
-      </select>
-    </div>
+  <form (ngSubmit)="onSubmit()">
 
-    <button [disabled]="bugFormGroup.invalid" type="submit">Save</button>
+    <app-bug-form #bugForm="bugForm" [bug]="bug"></app-bug-form>
+
+    <app-user-comment *ngIf="isEditMode" [userComments]="bug.userComments"></app-user-comment>
+
+    <button class="btn btn-primary" [disabled]="!bugForm.valid || !commentsFormValid" type="submit">Submit Form</button>
   </form>
 </section>

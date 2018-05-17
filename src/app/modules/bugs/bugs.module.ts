@@ -9,6 +9,8 @@ import { AuthenticatedUsersGuard } from "../../shared/authenticated-users.guard"
 import { UnfinishedChangesGuard } from "../../shared/unfinished-changes.guard";
 import { BugComponent } from "./bug/bug.component";
 import { BugResolver } from "./resolvers/bug.resolver";
+import { UserCommentComponent } from "./bug/user-comment/user-comment.component";
+import { BugFormComponent } from "./bug/bug-form/bug-form.component";
 
 const routes: Routes = [
   {
@@ -42,7 +44,7 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [BugsListComponent, BugComponent],
+  declarations: [BugsListComponent, BugComponent, UserCommentComponent, BugFormComponent],
   exports: [RouterModule],
   providers: [BugsService, BugsResolvers, BugResolver]
 })

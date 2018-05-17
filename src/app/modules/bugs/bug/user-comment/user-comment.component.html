@@ -1,0 +1,59 @@
+<!-- <div class="row">
+  <div class="col-5"><strong>Reporter</strong></div>
+  <div class="col-5"><strong>Comments</strong></div>
+  <div class="col-1"></div>
+</div>
+<div class="row" *ngFor="let comment of userComments">
+  <div class="col-5">{{comment.reporter}}</div>
+  <div class="col-5">{{comment.description}}</div>
+  <div class="col-1"></div>
+</div>
+<div class="row" [formGroup]="commentForm">
+    <div class="col-5">
+      <input class="form-control" type="text" formControlName="reporter">
+    </div>
+    <div class="col-5">
+        <textarea class="form-control" formControlName="description"> </textarea>
+    </div>
+    <div class="col-1">
+        <button type="button" class="btn btn-outline-primary" (click)="addComment(commentForm)">Add Comments</button>
+    </div>
+  </div> -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th>
+          Reporter
+        </th>
+        <th>
+          Comments
+        </th>
+        <th>
+
+        </th>
+      </tr>
+  </thead>
+  <tr *ngFor="let comment of userComments">
+    <td>
+      {{comment.reporter}}
+    </td>
+    <td>
+      {{comment.description}}
+    </td>
+    <td>
+
+    </td>
+  </tr>
+  <tr [formGroup]="commentForm">
+    <td valign="top">
+      <input class="form-control" type="text" formControlName="reporter">
+    </td>
+    <td valign="top">
+      <textarea class="form-control" formControlName="description"> </textarea>
+    </td>
+    <td>
+      <button class="btn btn-outline-primary" type="button" (click)="addComment(commentForm)">Add</button>
+    </td>
+  </tr>
+
+</table>
