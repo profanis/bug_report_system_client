@@ -6,14 +6,17 @@ import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
 import { BugsModule } from "./modules/bugs/bugs.module";
 import { DashboardModule } from "./modules/dashboard/dashboard.module";
+import { NotFoundComponent } from "./modules/not-found/not-found/not-found.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "dashboard", pathMatch: "full" }
+  { path: "", redirectTo: "dashboard", pathMatch: "full" },
+  { path: "**", component: NotFoundComponent } // Should be always last
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

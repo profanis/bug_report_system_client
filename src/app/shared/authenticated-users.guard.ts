@@ -7,7 +7,6 @@ export class AuthenticatedUsersGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
     console.log("user is authorized to see the route");
     return true;
   }

@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { NavigationModule } from "./navigation/navigation.module";
+import { CustomHttpInterceptor } from "./custom-http-interceptor";
 
 
 @NgModule({
@@ -15,6 +16,9 @@ import { NavigationModule } from "./navigation/navigation.module";
     NavigationModule,
     HttpClientModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
+  ]
 })
 export class CoreModule { }
