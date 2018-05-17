@@ -2,10 +2,16 @@
     <div class="form-group">
         <label>Title</label>
         <input class="form-control" type="text" formControlName="title"  />
+        <div class="text-danger" *ngIf="bugFormGroup.get('title').errors?.required && bugFormGroup.get('title').dirty">
+            Field is required
+        </div>
       </div>
       <div class="form-group">
         <label>Description</label>
         <textarea class="form-control" formControlName="description" ></textarea>
+        <div class="text-danger" *ngIf="bugFormGroup.get('description').errors?.required && bugFormGroup.get('description').dirty">
+            Field is required
+        </div>
       </div>
       <div class="form-group">
         <label>Priority</label>
@@ -30,5 +36,8 @@
           <option>Done</option>
           <option>Rejected</option>
         </select>
+        <div class="text-danger" *ngIf="bugFormGroup.get('status').errors?.required">
+            Field is required
+        </div>
       </div>
 </div>
