@@ -7,6 +7,7 @@
       <th scope="col" (click)="sortBy('reporter')">Reporter</th>
       <th scope="col" (click)="sortBy('createdAt')">Date Created</th>
       <th scope="col" (click)="sortBy('status')">Status</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
       <td>{{bug.reporter}}</td>
       <td>{{bug.createdAt}}</td>
       <td>{{bug.status}}</td>
+      <td><a [routerLink]="['/bug',bug.id]">Edit</a></td>
     </tr>
   </tbody>
 </table>

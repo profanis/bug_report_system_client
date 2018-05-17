@@ -27,8 +27,20 @@ export class BugsService {
     );
   }
 
+  getById(id: string): Observable<Bug> {
+    const endpoint = [this.ENDPOINT, id].join("/");
+    return  this.http.get(endpoint).pipe(
+      map((bug: any) => BugsMapper.toView(bug))
+    );
+  }
+
   save(bug: Bug): Observable<any> {
     return this.http.post(this.ENDPOINT, BugsMapper.toServer(bug));
+  }
+
+  update(id: string, bug: Bug): Observable<any> {
+    const endpoint = [this.ENDPOINT, id].join("/");
+    return this.http.put(endpoint, BugsMapper.toServer(bug));
   }
 
 }
