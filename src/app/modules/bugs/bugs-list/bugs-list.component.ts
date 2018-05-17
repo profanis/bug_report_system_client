@@ -19,6 +19,7 @@ export class BugsListComponent implements BaseComponent, OnInit {
   bugs$: Observable<Bug[]>;
   sortByColumn = "";
   sortDirection = "";
+  numberOfPage = 0;
 
   constructor(private route: ActivatedRoute,
               private bugsService: BugsService) { }
@@ -36,13 +37,30 @@ export class BugsListComponent implements BaseComponent, OnInit {
   sortBy(column: string) {
     this.sortDirection = this.getSortDirection(column);
     this.sortByColumn = column;
-    this.bugs$ = this.bugsService.get(this.sortByColumn, this.sortDirection);
+    this.fetchData();
+  }
+
+  private fetchData() {
+    this.bugs$ = this.bugsService.get(this.sortByColumn, this.sortDirection, this.numberOfPage);
   }
 
   private getSortDirection(column: string): "asc" | "desc" {
     return (this.sortByColumn === column && this.sortDirection === "asc")
                         ? "desc"
                         : "asc";
+  }
+
+  previousPage() {
+    if (this.numberOfPage <= 0) {
+      return;
+    }
+    this.numberOfPage--;
+    this.fetchData();
+  }
+
+  nextPage() {
+    this.numberOfPage++;
+    this.fetchData();
   }
 
 }

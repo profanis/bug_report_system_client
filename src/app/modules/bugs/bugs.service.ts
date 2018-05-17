@@ -12,14 +12,21 @@ import { ReturnStatement } from "@angular/compiler";
 export class BugsService {
 
   private readonly ENDPOINT = "http://localhost:3001/bugs";
+  private readonly DEFAULT_PAGE = 0;
+  private readonly DEFAULT_PAGE_LIMIT = 10;
 
   constructor(private http: HttpClient) { }
 
-  get(sortColumn: string, sortType: string = "asc"): Observable<Bug[]> {
+  get(sortColumn: string, sortType: string = "asc",
+      page: number = this.DEFAULT_PAGE, size: number = this.DEFAULT_PAGE_LIMIT): Observable<Bug[]> {
+
     let params = new HttpParams();
     if (sortColumn) {
       params = params.append("sort", `${sortColumn},${sortType}`);
     }
+
+    params = params.append("page", page.toString());
+    params = params.append("size", size.toString());
 
     // TODO the "any" type should reflect the schema of the server
     return this.http.get(this.ENDPOINT, { params: params}).pipe(

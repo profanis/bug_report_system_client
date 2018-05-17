@@ -23,3 +23,11 @@
     </tr>
   </tbody>
 </table>
+<ul class="pagination">
+  <li class="page-item" [ngClass]="{'disabled': numberOfPage <= 0}" (click)="previousPage()">
+    <a class="page-link" [routerLink]="">Previous</a>
+  </li>
+  <li class="page-item" (click)="nextPage()">
+    <a class="page-link" [routerLink]="">Next</a>
+  </li>
+</ul>
