@@ -1,12 +1,14 @@
 import "rxjs/add/observable/of";
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 
 import { Bug } from "../models/bugs.model";
 import { BugsService } from "./../bugs.service";
 import { BaseComponent } from "../../../shared/base.component";
+import { AdvancedSearchComponent } from "./advanced-search/advanced-search.component";
+import { AdvancedSearchModel } from "../models/advanced-search.model";
 
 
 @Component({
@@ -20,6 +22,8 @@ export class BugsListComponent implements BaseComponent, OnInit {
   sortByColumn = "";
   sortDirection = "";
   numberOfPage = 0;
+  advancedSearchModel: AdvancedSearchModel;
+  @ViewChild(AdvancedSearchComponent) advancedSearchComponent;
 
   constructor(private route: ActivatedRoute,
               private bugsService: BugsService) { }
@@ -41,7 +45,8 @@ export class BugsListComponent implements BaseComponent, OnInit {
   }
 
   private fetchData() {
-    this.bugs$ = this.bugsService.get(this.sortByColumn, this.sortDirection, this.numberOfPage);
+    this.bugs$ =
+      this.bugsService.get(this.advancedSearchModel, this.sortByColumn, this.sortDirection, this.numberOfPage);
   }
 
   private getSortDirection(column: string): "asc" | "desc" {
@@ -60,6 +65,11 @@ export class BugsListComponent implements BaseComponent, OnInit {
 
   nextPage() {
     this.numberOfPage++;
+    this.fetchData();
+  }
+
+  advancedSearch(data: AdvancedSearchModel) {
+    this.advancedSearchModel = data;
     this.fetchData();
   }
 

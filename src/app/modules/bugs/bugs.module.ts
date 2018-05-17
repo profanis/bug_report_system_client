@@ -11,6 +11,7 @@ import { BugComponent } from "./bug/bug.component";
 import { BugResolver } from "./resolvers/bug.resolver";
 import { UserCommentComponent } from "./bug/user-comment/user-comment.component";
 import { BugFormComponent } from "./bug/bug-form/bug-form.component";
+import { AdvancedSearchComponent } from './bugs-list/advanced-search/advanced-search.component';
 
 const routes: Routes = [
   {
@@ -44,7 +45,7 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [BugsListComponent, BugComponent, UserCommentComponent, BugFormComponent],
+  declarations: [BugsListComponent, BugComponent, UserCommentComponent, BugFormComponent, AdvancedSearchComponent],
   exports: [RouterModule],
   providers: [BugsService, BugsResolvers, BugResolver]
 })
