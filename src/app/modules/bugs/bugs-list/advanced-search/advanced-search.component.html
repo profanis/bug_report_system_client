@@ -1,9 +1,30 @@
 <div class="row advanced-search">
   <div class="col-2"><input class="form-control" type="text" [(ngModel)]="model.title" ></div>
-  <div class="col-1"><input class="form-control" type="text" [(ngModel)]="model.priority"></div>
-  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="model.reporter"></div>
+  <div class="col-1">
+    <select class="form-control" [(ngModel)]="model.priority">
+        <option></option>
+        <option value="0">Minor</option>
+        <option value="1">Major</option>
+        <option value="2">Critical</option>
+    </select>
+  </div>
+  <div class="col-2">
+    <select class="form-control" [(ngModel)]="model.reporter">
+      <option></option>
+      <option>QA</option>
+      <option>PO</option>
+      <option>Dev</option>
+    </select>
+  </div>
   <div class="col-2"></div>
-  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="model.status"></div>
+  <div class="col-2">
+      <select class="form-control" [(ngModel)]="model.status">
+        <option></option>
+        <option>Ready for test</option>
+        <option>Done</option>
+        <option>Rejected</option>
+      </select>
+  </div>
   <div class="col-2"></div>
-  <div class="col-1"><button (click)="search()">Search</button></div>
+  <div class="col-1"><button class="btn btn-primary" (click)="search()">Search</button></div>
 </div>

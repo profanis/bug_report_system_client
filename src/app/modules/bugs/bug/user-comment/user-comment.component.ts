@@ -35,7 +35,7 @@ export class UserCommentComponent implements OnInit, OnDestroy {
     });
   }
 
-  private addComment({value}: {value}) {
+  addComment({value}: {value}) {
     this.userComments = [...(this.userComments || []) , value];
     this.clearForm();
   }

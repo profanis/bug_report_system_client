@@ -1,11 +1,11 @@
 <button class="btn btn-primary" [routerLink]="['/bug']">Add new</button>
 
 <div class="row">
-  <div class="col-2"><strong>Title</strong></div>
-  <div class="col-1"><strong>Priority</strong></div>
-  <div class="col-2"><strong>Reporter</strong></div>
-  <div class="col-2"><strong>Date Created</strong></div>
-  <div class="col-2"><strong>Status</strong></div>
+  <div class="col-2" (click)="sortBy('title')"><strong>Title</strong></div>
+  <div class="col-1" (click)="sortBy('priority')"><strong>Priority</strong></div>
+  <div class="col-2" (click)="sortBy('reporter')"><strong>Reporter</strong></div>
+  <div class="col-2" (click)="sortBy('createdAt')"><strong>Date Created</strong></div>
+  <div class="col-2" (click)="sortBy('status')"><strong>Status</strong></div>
   <div class="col-2"><strong># comments</strong></div>
   <div class="col-1"></div>
 </div>
@@ -21,31 +21,7 @@
     <div class="col-2">{{bug.userComments?.length}}</div>
     <div class="col-1"><a [routerLink]="['/bug',bug.id]">Edit</a></div>
   </div>
-<!--
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col" (click)="sortBy('title')">Title</th>
-      <th scope="col" (click)="sortBy('priority')">Priority</th>
-      <th scope="col" (click)="sortBy('reporter')">Reporter</th>
-      <th scope="col" (click)="sortBy('createdAt')">Date Created</th>
-      <th scope="col" (click)="sortBy('status')">Status</th>
-      <th scope="col"># comments</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let bug of (bugs$ | async) ">
-      <th>{{bug.title}}</th>
-      <td>{{bug.priority}}</td>
-      <td>{{bug.reporter}}</td>
-      <td>{{bug.createdAt}}</td>
-      <td>{{bug.status}}</td>
-      <td>{{bug.userComments?.length}}</td>
-      <td><a [routerLink]="['/bug',bug.id]">Edit</a></td>
-    </tr>
-  </tbody>
-</table> -->
+
 <ul class="pagination">
   <li class="page-item" [ngClass]="{'disabled': numberOfPage <= 0}" (click)="previousPage()">
     <a class="page-link" [routerLink]="">Previous</a>
