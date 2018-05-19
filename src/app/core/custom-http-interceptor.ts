@@ -21,7 +21,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
                                                        HttpUserEvent<any>> {
     req = req.clone({
       setHeaders: {
-        Authorization: "Token"
+        Authorization: "code.hub.ng5.token"
       }
     });
 

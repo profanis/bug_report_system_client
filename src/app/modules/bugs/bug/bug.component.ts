@@ -1,21 +1,21 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from "@angular/core";
-import { Bug } from "../models/bugs.model";
-import { BugsService } from "../bugs.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { UserCommentComponent } from "./user-comment/user-comment.component";
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
+
+import { BugsService } from "../bugs.service";
+import { Bug } from "../models/bugs.model";
+import { BaseComponent } from "./../../../shared/base.component";
 import { BugFormComponent } from "./bug-form/bug-form.component";
+import { UserCommentComponent } from "./user-comment/user-comment.component";
 
 @Component({
   selector: "app-bug",
   templateUrl: "./bug.component.html",
   styleUrls: ["./bug.component.css"]
 })
-export class BugComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BugComponent implements BaseComponent, OnInit, AfterViewInit, OnDestroy {
 
   commentStatusSubscription: Subscription;
-  // bugFormGroup: FormGroup;
   isEditMode: boolean;
   bug: Bug;
   commentsFormValid = true;
@@ -26,6 +26,11 @@ export class BugComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private service: BugsService,
               private router: Router,
               private route: ActivatedRoute) { }
+
+  canDeactivate = () => {
+    return !this.bugFormComponent.bugFormGroup.touched &&
+          ( !this.userCommentComponent || !this.userCommentComponent.commentForm.touched);
+  }
 
   ngOnInit() {
     this.route.data.subscribe((data: { bug: Bug}) => {

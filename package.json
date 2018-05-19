@@ -10,7 +10,7 @@
     "start": "ng serve",
     "build": "ng build --prod --stats-json",
     "build_dev": "ng build --stats-json",
-    "test": "ng test",
+    "test": "ng test -sm=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json"

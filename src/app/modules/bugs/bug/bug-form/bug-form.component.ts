@@ -9,21 +9,18 @@ import { Subscription } from "rxjs/Subscription";
   styleUrls: ["./bug-form.component.css"],
   exportAs: "bugForm"
 })
-export class BugFormComponent implements OnChanges, OnDestroy {
+export class BugFormComponent implements OnChanges {
 
-  formStatusChangeSubscription: Subscription;
   @Input() bug: Bug;
   bugFormGroup: FormGroup;
-  valid = false;
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.buildForm(this.bug);
-    this.bugFormGroup.updateValueAndValidity();
   }
 
-  private buildForm(bug: Bug) {
+  buildForm(bug: Bug) {
     this.bugFormGroup = new FormGroup({
       id: new FormControl(bug.id),
       title: new FormControl(bug.title, Validators.required),
@@ -35,9 +32,8 @@ export class BugFormComponent implements OnChanges, OnDestroy {
 
     this.statusConditionalValidation();
 
-    this.formStatusChangeSubscription = this.bugFormGroup.statusChanges.subscribe(status => {
-      this.valid = status === "VALID";
-    });
+
+    this.bugFormGroup.updateValueAndValidity();
   }
 
   private statusConditionalValidation() {
@@ -55,12 +51,6 @@ export class BugFormComponent implements OnChanges, OnDestroy {
 
   getBugFormValues() {
     return this.bugFormGroup.value;
-  }
-
-  ngOnDestroy(): void {
-    if (this.formStatusChangeSubscription) {
-      this.formStatusChangeSubscription.unsubscribe();
-    }
   }
 
 }

@@ -1,5 +1,5 @@
 <div [formGroup]="bugFormGroup">
-    <div class="form-group">
+      <div class="form-group">
         <label>Title</label>
         <input class="form-control" type="text" formControlName="title"  />
         <div class="text-danger" *ngIf="bugFormGroup.get('title').errors?.required && bugFormGroup.get('title').dirty">

@@ -26,6 +26,7 @@ const routes: Routes = [
   {
     path: "bug",
     component: BugComponent,
+    canDeactivate: [UnfinishedChangesGuard],
     data: {
       bug: {
       }
@@ -34,6 +35,7 @@ const routes: Routes = [
   {
     path: "bug/:id",
     component: BugComponent,
+    canDeactivate: [UnfinishedChangesGuard],
     resolve: {
       bug: BugResolver
     }

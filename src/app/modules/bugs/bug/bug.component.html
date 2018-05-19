@@ -6,6 +6,6 @@
 
     <app-user-comment *ngIf="isEditMode" [userComments]="bug.userComments"></app-user-comment>
 
-    <button class="btn btn-primary" [disabled]="!bugForm.valid || !commentsFormValid" type="submit">Submit Form</button>
+    <button class="btn btn-primary" [disabled]="!bugForm.bugFormGroup.valid || !commentsFormValid" type="submit">Submit Form</button>
   </form>
 </section>
