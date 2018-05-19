@@ -1,9 +1,9 @@
 <div class="row advanced-search">
-  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="title" ></div>
-  <div class="col-1"><input class="form-control" type="text" [(ngModel)]="priority"></div>
-  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="reporter"></div>
+  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="model.title" ></div>
+  <div class="col-1"><input class="form-control" type="text" [(ngModel)]="model.priority"></div>
+  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="model.reporter"></div>
   <div class="col-2"></div>
-  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="status"></div>
+  <div class="col-2"><input class="form-control" type="text" [(ngModel)]="model.status"></div>
   <div class="col-2"></div>
   <div class="col-1"><button (click)="search()">Search</button></div>
 </div>

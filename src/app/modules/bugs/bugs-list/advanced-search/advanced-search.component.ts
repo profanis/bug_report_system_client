@@ -9,10 +9,8 @@ import { AdvancedSearchModel } from "../../models/advanced-search.model";
 export class AdvancedSearchComponent implements OnInit {
 
   @Output() advancedSearch = new EventEmitter<AdvancedSearchModel>();
-  title: string;
-  priority: string;
-  reporter: string;
-  status: string;
+
+  model = new AdvancedSearchModel();
 
   constructor() { }
 
@@ -20,12 +18,7 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   search(): void {
-    this.advancedSearch.emit({
-      title: this.title,
-      priority: this.priority,
-      reporter: this.reporter,
-      status: this.status
-    });
+    this.advancedSearch.emit(this.model);
   }
 
 }

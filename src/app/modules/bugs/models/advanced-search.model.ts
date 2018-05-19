@@ -1,6 +1,9 @@
-export interface AdvancedSearchModel {
-  title?: string;
-  priority?: string;
-  reporter?: string;
-  status?: string;
+export class AdvancedSearchModel {
+
+  constructor() {}
+
+  public title: string;
+  public priority: string;
+  public reporter: string;
+  public status: string;
 }
