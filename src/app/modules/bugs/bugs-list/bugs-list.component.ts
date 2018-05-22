@@ -1,4 +1,5 @@
 import "rxjs/add/observable/of";
+import "rxjs/add/operator/map";
 
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
@@ -9,6 +10,7 @@ import { BugsService } from "./../bugs.service";
 import { BaseComponent } from "../../../shared/base.component";
 import { AdvancedSearchComponent } from "./advanced-search/advanced-search.component";
 import { AdvancedSearchModel } from "../models/advanced-search.model";
+import { Pageable } from "../pageable.mapper";
 
 
 @Component({
@@ -22,6 +24,13 @@ export class BugsListComponent implements BaseComponent, OnInit {
   sortByColumn = "";
   sortDirection = "";
   numberOfPage = 0;
+
+  totalPages: number;
+  totalRecords: number;
+  page: number;
+  perPage: number;
+
+
   advancedSearchModel: AdvancedSearchModel;
   @ViewChild(AdvancedSearchComponent) advancedSearchComponent;
 
@@ -31,8 +40,9 @@ export class BugsListComponent implements BaseComponent, OnInit {
   canDeactivate = () => true;
 
   ngOnInit() {
-    this.route.data.subscribe((data: { bugs: Bug[]}) => {
-      this.bugs$ = Observable.of(data.bugs);
+    this.route.data.subscribe((data: { bugs: Pageable<Bug>}) => {
+      this.getPaginationProperties(data.bugs);
+      this.bugs$ = Observable.of(data.bugs.results);
     });
 
   }
@@ -46,7 +56,12 @@ export class BugsListComponent implements BaseComponent, OnInit {
 
   private fetchData() {
     this.bugs$ =
-      this.bugsService.get(this.advancedSearchModel, this.sortByColumn, this.sortDirection, this.numberOfPage);
+      this.bugsService
+        .get(this.advancedSearchModel, this.sortByColumn, this.sortDirection, this.numberOfPage)
+        .map(c => {
+          this.getPaginationProperties(c);
+          return c.results;
+        });
   }
 
   private getSortDirection(column: string): "asc" | "desc" {
@@ -55,22 +70,20 @@ export class BugsListComponent implements BaseComponent, OnInit {
                         : "asc";
   }
 
-  previousPage() {
-    if (this.numberOfPage <= 0) {
-      return;
-    }
-    this.numberOfPage--;
-    this.fetchData();
-  }
-
-  nextPage() {
-    this.numberOfPage++;
-    this.fetchData();
-  }
-
   advancedSearch(data: AdvancedSearchModel) {
     this.advancedSearchModel = data;
     this.fetchData();
+  }
+
+  pageChanged(numberOfPage: number) {
+    this.numberOfPage = numberOfPage;
+    this.fetchData();
+  }
+  private getPaginationProperties(pageableBug: Pageable<Bug>) {
+    this.totalPages = pageableBug.totalPages;
+    this.page = pageableBug.page;
+    this.perPage = pageableBug.perPage;
+    this.totalRecords = pageableBug.totalRecords;
   }
 
 }

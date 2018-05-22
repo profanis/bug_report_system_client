@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { map } from "rxjs/operators";
@@ -7,6 +7,7 @@ import { BugsMapper } from "./bugs.mapper";
 import { Bug } from "./models/bugs.model";
 import { ReturnStatement } from "@angular/compiler";
 import { AdvancedSearchModel } from "./models/advanced-search.model";
+import { Pageable } from "./pageable.mapper";
 
 
 @Injectable()
@@ -19,7 +20,7 @@ export class BugsService {
   constructor(private http: HttpClient) { }
 
   get(advancedSearchModel: AdvancedSearchModel, sortColumn: string, sortType: string = "asc",
-      page: number = this.DEFAULT_PAGE, size: number = this.DEFAULT_PAGE_LIMIT): Observable<Bug[]> {
+      page: number = this.DEFAULT_PAGE, size: number = this.DEFAULT_PAGE_LIMIT): Observable<Pageable<Bug>> {
 
     let params = new HttpParams();
     if (sortColumn) {
@@ -38,8 +39,22 @@ export class BugsService {
     }
 
     // TODO the "any" type should reflect the schema of the server
-    return this.http.get(this.ENDPOINT, { params: params}).pipe(
-      map((bugs: any[]) => bugs.map(BugsMapper.toView))
+    return this.http.get(this.ENDPOINT, { params: params,  observe: "response"}).pipe(
+      map((response) => {
+        const flattenData = Object.entries(response.body).map(c => c[1]);
+
+        const totalPagesHeader = response.headers.get("totalPages");
+        const totalRecordsHeader = response.headers.get("totalRecords");
+        const pageHeader = response.headers.get("page");
+        const perPageHeader = response.headers.get("perPage");
+
+        return new Pageable(
+          Number(totalPagesHeader),
+          Number(totalRecordsHeader),
+          Number(pageHeader),
+          Number(perPageHeader),
+          flattenData.map(BugsMapper.toView));
+      })
     );
   }
 

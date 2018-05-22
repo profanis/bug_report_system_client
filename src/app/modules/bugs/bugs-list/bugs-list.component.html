@@ -22,11 +22,4 @@
     <div class="col-1"><a [routerLink]="['/bug',bug.id]">Edit</a></div>
   </div>
 
-<ul class="pagination">
-  <li class="page-item" [ngClass]="{'disabled': numberOfPage <= 0}" (click)="previousPage()">
-    <a class="page-link" [routerLink]="">Previous</a>
-  </li>
-  <li class="page-item" (click)="nextPage()">
-    <a class="page-link" [routerLink]="">Next</a>
-  </li>
-</ul>
+<app-pagination [totalPages]="totalPages" (pageChanged)="pageChanged($event)" ></app-pagination>
